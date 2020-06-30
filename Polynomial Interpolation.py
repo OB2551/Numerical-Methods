@@ -108,7 +108,7 @@ def find_coeffs(x,k, coeffs, X,Y):
         return p_k+c_k*Newton_Basis(k,x,X)
 
 def Interpolant_N(x,X,Y):
-    '''Compute Interpolant with Newton method'''
+    '''Compute Interpolant with Newton method, x input value(s), X,Y collocation data'''
     Newt_Coeffs = []
     N = len(X)
     find_coeffs(1,N-1,Newt_Coeffs,X,Y)
