@@ -31,7 +31,9 @@ def FixedPoint(f,n,x0):
 
 def Newtons(f,f_prime,x,n ):
     '''Newtons method, requires funciton f to be continuously diffferentiable, 
-    and have non-zero derivative at root, f_prime.  Initial guess x, n number of iterations'''
+    and have non-zero derivative at root, 
+    f_prime derivative of f
+    Initial guess x, n number of iterations'''
     i = 0
     print('x,    f(x):')
     while i <n:
