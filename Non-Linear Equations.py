@@ -1,14 +1,16 @@
 '''Non-Linear Equation Solvers'''
+import numpy as np
+import math
 
-
-def Bisection(a,b,f,n):
+def Bisection(a,b,f,tol):
     '''Solve f(x) = 0 by bisection method, inputs: interval endpoints a, b, funciton f, 
-    n number of iterations, n>0.
+    tol: tolerance/error, set by user so that approximation within certain tolerance of exact solution
     Note there must be a solution to f(x) = 0 in [a,b],
     f continuous'''
+    n = math.ceil(np.log((b-a)/tol)/np.log(2)-1)
     i = 0
     
-    while i< n:
+    while i<= n:
         x = (a+b)/2
         if f(x)*f(b)<0:
             a = x
