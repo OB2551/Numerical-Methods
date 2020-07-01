@@ -83,7 +83,7 @@ def GEPIVOT(A, b):
 
 def Jacobi(A,b,tol,x0):
     '''Solve Ax=b with Jacobi iterative method. User specify tolerance 
-    and intial guess x0'''
+    and intial guess x0, must be a scalar'''
     n = len(b)
     xk = x0*np.ones((n,))
     rk = np.dot(A,xk) - b
@@ -107,7 +107,7 @@ def Jacobi(A,b,tol,x0):
 
 def GaussSeidel_2(A,b,tol,x0):
     '''solving Ax=b by the Gauss-Seidel iterative method
-    User specify initial guess and tolerance'''
+    User specify scalar initial guess x0and tolerance'''
     n = len(b)
     xk = x0*np.ones((n,))
     dinv = 1.0/np.diag(A)  
