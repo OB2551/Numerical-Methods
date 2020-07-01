@@ -1,11 +1,11 @@
-'''Library functions for polynomial interpolation'''
+'''Library of functions for polynomial interpolation'''
 import numpy as np
 import sympy as sym
 import matplotlib.pyplot as plt
 
 def p(x, a):
     '''Evaluate Polynomial p at x.
-       Use distributive law to reduce number of F.L.O.P's
+       Use distributive law to reduce number of FLOPs
        a = (a0,a1,a2,....,an)
        p(x) = a0+a1x+...+anx^n = a0+x(a1+x(a2+..(...(an))))'''
     poly = 0
@@ -29,7 +29,10 @@ def p_Newt(x,c,X):
 
 
 def Interpolant_P(x,X,Y):
-    '''Interpolation of collacation points (x0,y0),.....(xn,yn)
+    '''Interpolation of collocation points (x0,y0),.....(xn,yn)
+       X = [x0,x1,...,xn]
+       Y = [y0,y1,....,yn]
+       x = point(s) to evaluate interpolating polynomial at
        Using power basis method, hence the P. Solves a linear system to find coefficients
        Requires every collocation point to have a unique x value'''
     A = []
@@ -66,7 +69,9 @@ def plot_interpolant(x,y, X,Y, p, method):
     
     
 def Basis_j(x,j, X):
-    '''Compute jth Cardinal Basis evaluated at x'''
+    '''x: point(s) to evaluate jth cardinal basis at, 
+    X = [x0,x1,...xn] collocation x values'''
+    
     prod = 1
     x_points = list(X.copy())
     x_points.remove(X[j])
@@ -76,7 +81,10 @@ def Basis_j(x,j, X):
 
 
 def Interpolant_L(x,X,Y):
-    '''Compute Lagrangian Interpolant'''
+    '''Compute Lagrangian Interpolant, hence L in funciton name
+    x: point(s) to evaluate interpolating polynomial at
+    X = [x0,...xn], Y = [y0, .. yn] collocation data '''
+    
     p = 0
     for j in range(len(X)):
         p += Y[j]*Basis_j(x,j,X)
@@ -118,7 +126,9 @@ def Interpolant_N(x,X,Y):
 
 def ChebyshevNodes(a,b,n,f):
     '''computes chebychev collocation nodes to be used for polynomial interpolation 
-     for funciton f on interval [a,b]'''
+     for funciton f on interval [a,b]
+     n number of nodes to use.
+     Will generally interpolate more accurately than uniformly spaced nodes '''
     #nodes
     X = []
     Y = []
