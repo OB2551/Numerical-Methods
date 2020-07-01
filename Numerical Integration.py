@@ -4,6 +4,11 @@ import sympy as sym
 
 
 def Rect(partition_size, a, b, f):
+    '''approximate area under curve with rectangles, using left endpoint of each sub interval
+    partition_size: number of rectangles used
+    a = interval left endpoint
+    b = interval right endpoint
+    f = function to integrate'''
     xpts = np.linspace(a,b,partition_size+1)
     approx = 0.0
     for i in range(partition_size):
@@ -126,7 +131,10 @@ def Gauss_Quad(a,b,m,f):
 
 
 def Comp_GC(a,b,N,m,f):
-    '''Composite Gaussian Quadrature with Nm subintervals'''
+    '''Composite Gaussian Quadrature with Nm subintervals
+    a: left interval endpoint
+    b: right interval endpoint
+    f: function to integrate'''
     comp_nodes = nodes(N, a,b)
     integral = 0
     for i in range(N):
