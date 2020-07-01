@@ -4,12 +4,16 @@ import matplotlib.pyplot as plt
 import sympy as sym
 
 def phi(x,h,f):
+    '''x point(s) to evaluate
+    h step size, f function'''
     return (f(x+h)-f(x-h))/(2*h)
 
 def Richardsons(n,x,f,h):
     '''Richardson Extrapolation for finite difference approximaiton for f'(x)
-    eliminates errors by linear combinations
-    Most accurate answer will be the entry in top right corner of output matrix'''
+    eliminates errors by linear combinations of approximations.
+    Most accurate answer will be the entry in top right corner of output matrix
+    f function, h step size, x point to evaluate derivative at
+    n an integer, will determine order of accuracy, error will be O(h^(2n))'''
     R= np.zeros((n,n))
     for i in range(n):
         R[i,0] = phi(x,2**i*h, f)
@@ -28,10 +32,12 @@ def foward(x,h,f):
 
 def calculate_coefficients(n,h):
     '''Calculate coeeficients for undetermined coefficients method so that
-    differentiation is exact for polynomials of up to degree n
-    REquires solving a linear system.
+    differentiation is exact for polynomials of up to degree n.
+    h step size
+    n degree of accuracy
+    Requires solving a linear system.
     Coefficients are independent of grid, we calculate over coefficients over [0,n]
-    and transform to relevannt interval'''
+    and transform to relevant interval'''
     x = sym.Symbol('x')
     c = [sym.Symbol('a'+str(i)) for i in range(n+1)]
     A = []
@@ -63,8 +69,12 @@ def undetermined_coefficients(n,h,f,y,e):
     
 
 def plot_derivative(x,f,n,h,e):
-    '''Plot approximation of derivative over linspace x'''
-    '''Uses method of undetermined coefficients'''
+    '''Plot approximation of derivative over linspace x
+    uses method of undetermined coefficients.
+    x: point(s) to evaluate approximation at
+    f: function of which we are approximating derivative
+    n: degree of polynomial up to which method exact
+    e: between 0 and n.
     y = undetermined_coefficients(n,h,f,x,e)
     plt.plot(x,y, label = 'Approximation of derivative')
     plt.show()
